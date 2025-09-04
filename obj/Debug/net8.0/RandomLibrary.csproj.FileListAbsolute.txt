@@ -1,0 +1,15 @@
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.AssemblyInfoInputs.cache
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.AssemblyInfo.cs
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.csproj.CoreCompileInputs.cache
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.sourcelink.json
+D:\RandomLibrary\build_output\RandomLibrary.exe
+D:\RandomLibrary\build_output\RandomLibrary.deps.json
+D:\RandomLibrary\build_output\RandomLibrary.runtimeconfig.json
+D:\RandomLibrary\build_output\RandomLibrary.dll
+D:\RandomLibrary\build_output\RandomLibrary.pdb
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.dll
+D:\RandomLibrary\obj\Debug\net8.0\refint\RandomLibrary.dll
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.pdb
+D:\RandomLibrary\obj\Debug\net8.0\RandomLibrary.genruntimeconfig.cache
+D:\RandomLibrary\obj\Debug\net8.0\ref\RandomLibrary.dll
