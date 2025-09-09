@@ -9,13 +9,43 @@ namespace RandLib
 
         public DistTable(int[] ws)
         {
-            Weights = [];
+            int[] Weights = new int[ws.Length];
             TotalWeight = 0;
+
             for (int i = 0; i < ws.Length; i++)
             {
                 TotalWeight += ws[i];
                 Weights[i] = TotalWeight;
             }
         }
+
+        public DistTable RemoveWeightAt(int index)
+        {
+
+            int[] newWeights = new int[Weights.Length - 1];
+
+            int amntRemoved = Weights[index];
+
+            for (int i = 0; i < newWeights.Length; i++)
+            {
+                if (i >= index)
+                {
+                    newWeights[i] = Weights[i + 1] - amntRemoved;
+                }
+                else
+                {
+                    newWeights[i] = Weights[i];
+                }
+            }
+
+            DistTable smallerTable = new DistTable(newWeights);
+
+            return smallerTable;
+        }
+
+        public bool isEmpty()
+        {
+            return Weights.Length == 0;
+        } 
     }
 }

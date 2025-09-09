@@ -52,7 +52,7 @@ namespace RandLib.CategoricalDist
                 bigRando >>= 7;
                 segmentsUsed++;
 
-                outcomes[flipsDone] = pHeads > smallRando;
+                outcomes[flipsDone] = scaledProb >= smallRando;
 
                 flipsDone++;
             }
