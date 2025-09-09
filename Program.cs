@@ -12,17 +12,17 @@ class Program()
         int testSz = 10000000;
         Random rng = new Random();
 
-        // int[] counts = new int[4];
-        // int[] ws = [100, 3000, 600, 300];
-        // DistTable weights = new DistTable(ws);
+        int[] counts = new int[4];
+        int[] ws = [100, 3000, 600, 300];
+        DistTable weights = new DistTable(ws);
         
 
-        // for (int i = 0; i < testSz; i++)
-        // {
-        //     counts[CategoricalDist.rollWeighted(weights)] += 1;
-        // }
+        for (int i = 0; i < testSz; i++)
+        {
+            counts[CategoricalDist.rollWeighted(weights)] += 1;
+        }
 
-        // Console.WriteLine("counts: " + counts[0] + ", "+ counts[1] + ", "+ counts[2] + ", "+ counts[3] );
+        Console.WriteLine("counts: " + counts[0] + ", "+ counts[1] + ", "+ counts[2] + ", "+ counts[3] );
 
         Stopwatch sw = Stopwatch.StartNew();
 
@@ -33,14 +33,14 @@ class Program()
         for (int i = 0; i < testSz; i++)
         {
             (res1, rng) = CategoricalDist.flip(0.5, rng);
-            // if (res1)
-            // {
-            //     count1++;
-            // }
-            // else
-            // {
-            //     count2++;
-            // }
+            if (res1)
+            {
+                count1++;
+            }
+            else
+            {
+                count2++;
+            }
 
         }
 
@@ -58,17 +58,17 @@ class Program()
         int count3 = 0;
         int count4 = 0;
         (res2, rng) = CategoricalDist.flipx(testSz, 0.5, rng);
-        // foreach (bool b in res2)
-        // {
-        //     if (b)
-        //     {
-        //         count3++;
-        //     }
-        //     else
-        //     {
-        //         count4++;
-        //     }
-        // }
+        foreach (bool b in res2)
+        {
+            if (b)
+            {
+                count3++;
+            }
+            else
+            {
+                count4++;
+            }
+        }
         sw1.Stop();
         Console.WriteLine("GOOD VERSION:");
         Console.WriteLine("heads: " + count3);

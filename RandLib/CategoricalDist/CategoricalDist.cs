@@ -57,6 +57,34 @@ namespace RandLib.CategoricalDist
             }
             return ind;
         }
+        public static (int, Random) rollWeighted(DistTable outcomes, Random seed)
+        {
+            double observation = seed.NextDouble() * outcomes.TotalWeight;
+
+            int bot = 0;
+            int top = outcomes.Weights.Length - 1;
+
+            int ind = outcomes.Weights.Length / 2;
+            bool found = false;
+            while (ind != 0 && !found)
+            {
+                if (observation >= outcomes.Weights[ind])
+                {
+                    bot = ind;
+                    ind = bot + (int)Math.Ceiling((top - bot) / 2.0);
+                }
+                else if (observation >= outcomes.Weights[ind - 1])
+                {
+                    found = true;
+                }
+                else
+                {
+                    top = ind;
+                    ind = bot + (int)Math.Floor((top - bot) / 2.0);
+                }
+            }
+            return (ind, seed);
+        }
 
 
         //performs x flips and returns an array of the outcomes, heads = true.  pHeads precision is downgraded to 7 bits, so do not use for precise or small chances
