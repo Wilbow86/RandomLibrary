@@ -5,17 +5,20 @@ namespace RandLib
         //weights is an array that tracks the CDF of each value multiplied by the total weight in the list 
         // (ex, 1st element is 1k, 2nd is 2k and no others, weights[0] will be (1k/3k) * 3k = 1k and weights[1] will be (1k+2k)/3k * 3k = 3k )
         public int[] Weights;
+        public int[] IndexMap;
         public int TotalWeight;
 
         public DistTable(int[] ws)
         {
             Weights = new int[ws.Length];
+            IndexMap = new int[ws.Length];
             TotalWeight = 0;
 
             for (int i = 0; i < ws.Length; i++)
             {
                 TotalWeight += ws[i];
                 Weights[i] = TotalWeight;
+                IndexMap[i] = i;
             }
         }
 
@@ -41,6 +44,35 @@ namespace RandLib
             DistTable smallerTable = new DistTable(newWeights);
 
             return smallerTable;
+        }
+
+        public void RemoveWeightAtInPlace(int index)
+        {
+            int prev = (index == 0) ? 0: Weights[index-1];
+            int amntRemoved = Weights[index] - prev;
+            TotalWeight -= amntRemoved;
+
+            for (int i = 0; i < Weights.Length - 1; i++)
+            {
+                if (i >= index)
+                {
+                    Weights[i] = Weights[i + 1] - amntRemoved;
+                    IndexMap[i] = IndexMap[i + 1];
+                }
+                else
+                {
+                    Weights[i] = Weights[i];
+                }
+            }
+        }
+
+        public DistTable Copy()
+        {
+            DistTable copy = new DistTable([]);
+            copy.Weights = (int[])Weights.Clone();
+            copy.TotalWeight = TotalWeight;
+            copy.IndexMap = (int[])IndexMap.Clone();
+            return copy;
         }
 
         public bool isEmpty()

@@ -86,6 +86,8 @@ namespace RandLib.CategoricalDist
             return (ind, seed);
         }
 
+        
+
 
         //performs x flips and returns an array of the outcomes, heads = true.  pHeads precision is downgraded to 7 bits, so do not use for precise or small chances
         public static bool[] flipx(int numFlips, double pHeads)
@@ -116,10 +118,10 @@ namespace RandLib.CategoricalDist
             }
             return outcomes;
         }
-        
-         public static (bool[], Random) flipx(int numFlips, double pHeads, Random seed)
+
+        public static (bool[], Random) flipx(int numFlips, double pHeads, Random seed)
         {
-            
+
             long bigRando = seed.NextInt64();
             long smallRando = 0;
 
@@ -133,13 +135,42 @@ namespace RandLib.CategoricalDist
                 {
                     segmentsUsed = 0;
                     bigRando = seed.NextInt64();
-                    
+
                 }
                 smallRando = bigRando & 0x7F;
                 bigRando >>= 7;
                 segmentsUsed++;
 
                 outcomes[flipsDone] = scaledProb >= smallRando;
+
+                flipsDone++;
+            }
+            return (outcomes, seed);
+        }
+        
+        //batch flips where each flip is weighted individually.  weights array must be of length equal to numFlips or greater
+        public static (bool[], Random) flipxDiffWeights(int numFlips, double[] weights, Random seed)
+        {
+
+            long bigRando = seed.NextInt64();
+            long smallRando = 0;
+
+            bool[] outcomes = new bool[numFlips];
+            int segmentsUsed = 0;
+            int flipsDone = 0;
+            while (flipsDone < numFlips)
+            {
+                if (segmentsUsed > 8)
+                {
+                    segmentsUsed = 0;
+                    bigRando = seed.NextInt64();
+
+                }
+                smallRando = bigRando & 0x7F;
+                bigRando >>= 7;
+                segmentsUsed++;
+
+                outcomes[flipsDone] = (int)(weights[flipsDone] * 127.0) >= smallRando;
 
                 flipsDone++;
             }
