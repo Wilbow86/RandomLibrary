@@ -27,17 +27,19 @@ namespace RandLib
 
             int[] newWeights = new int[Weights.Length - 1];
 
-            int amntRemoved = Weights[index];
+            // int prev = (index == 0) ? 0: Weights[index-1];
+            // int amntRemoved = Weights[index] - prev;
 
             for (int i = 0; i < newWeights.Length; i++)
             {
                 if (i >= index)
                 {
-                    newWeights[i] = Weights[i + 1] - amntRemoved;
+                    newWeights[i] = Weights[i + 1] - Weights[i];
                 }
                 else
                 {
-                    newWeights[i] = Weights[i];
+                    int pre = (index == 0) ? 0: Weights[i-1];
+                    newWeights[i] = Weights[i] - pre;
                 }
             }
 
